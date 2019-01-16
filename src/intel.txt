@@ -1,0 +1,4 @@
+Cryptage : DES
+Clef supposée : Année en cours si cryptée, -1 dans le cas contraire
+Structure : .zip crypté en DES, incluant un manifeste en XML
+XML : Propriétaire, verrouillage, liste des sources incluses
