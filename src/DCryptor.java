@@ -11,16 +11,7 @@ public class DCryptor {
 		Scanner scanner = new Scanner(System.in);
 		int magic = 2019;
 		String version = "0.0.2";
-		System.out.println("gDCryptor " + version + "\n");
-
-		/*
-		 * Sstem.out.println("Full path to .dc file: "); String pathe = scanner.next();
-		 * String path = URLDecoder.decode(pathe, "UTF-8");
-		 * System.out.println("Filename (w/o .dc): "); String filename = scanner.next();
-		 * scanner.close(); String filepath = path+"\\"+filename+".dc"; File dc_file =
-		 * new File(filepath); System.out.println(filepath);
-		 * System.out.println(dc_file); System.out.println(magic);
-		 */
+		System.out.println("gDCryptor " + version);
 		File dc_file;
 		String filename;
 		String path;
