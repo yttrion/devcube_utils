@@ -1,2 +1,7 @@
 # devcube_utils
-Utilitaire compgnon à DevCube.
+Utilitaire compagnon à DevCube.
+## Version graphique
+###### 0.0.2
+
+
+Décompresse les fichiers .dc
