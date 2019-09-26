@@ -2,7 +2,7 @@
 import java.util.*;
 import java.util.Map.Entry;
 import java.io.*;
-import java.net.URLDecoder;
+//import java.net.URLDecoder;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -16,14 +16,14 @@ public class DCryptor {
 		System.out.println("----------------------");
 		System.out.println("1 - Decrypt");
 		System.out.println("2 - Encrypt");
-		System.out.print("Choice> ");
+		System.out.print("> ");
+		File dc_file; 
+		String filename; //.dc filename
+		String path; //Absolute path to .dc
 		int choice = scanner.nextInt();
-		scanner.close();
 		if (choice == 1) {
-			File dc_file;
-			String filename;
-			String path;
-			System.out.println("[*] - Encrypt mode.");
+			
+			System.out.println("[*] - Decrypt mode.");
 			JFileChooser chooser = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Devcube archive", "dc");
 			chooser.setFileFilter(filter);
@@ -32,6 +32,7 @@ public class DCryptor {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				dc_file = new File(chooser.getSelectedFile().getAbsolutePath());
 				filename = chooser.getSelectedFile().getName();
+				System.out.println(dc_file);
 				// File to str
 				// String str = FileUtils.readFileToString(file, "UTF-8");
 				path = chooser.getCurrentDirectory().toString();
@@ -39,7 +40,8 @@ public class DCryptor {
 				// Décryptage et récupération du zip
 				Map<String, byte[]> zipEntries = Zip.readEntries(dc_file, magic);
 
-				System.out.println("[*] - Zipped.");
+				System.out.println("[*] - Unzipped.");
+				System.out.println("[*] - Extracting.");
 
 				new File(path + "\\" + filename + "_extracted").mkdirs();
 				System.out.println("[*] - _extracted folder created.");
@@ -65,16 +67,46 @@ public class DCryptor {
 		}
 		else if (choice ==2){
 			System.out.println("[*] - Encrypt mode.");
-			System.out.println("[!] - TODO");
-		}
+			System.out.println("[*] - Is there an .xml file in folder?");
+			System.out.println("1 - Yes");
+			System.out.println("2 - No");
+			System.out.print("> ");
+			int ans = scanner.nextInt();
+			if (ans==1){
+				System.out.println("[*] - Encrypter");
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.setDialogTitle("Choose directory of decompressed project.");
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) { 
+					//System.out.println(chooser.getSelectedFile());
+					//Returns selected folder
+					
+					filename = chooser.getSelectedFile().getAbsolutePath();
+					System.out.println(filename);
+					path = filename + "_compressed.dc";
+					System.out.println(path);
+					Unzip zipp = new Unzip(path, filename, magic);
+					zipp.DoIt();
+					
+
+
+				}
+				  else {
+					System.out.println("[!] - No directory selected ");
+					}
+				   }
+			}
+			else {
+				System.out.println("[*] - XML Editor");
+				System.out.println("[*] - NOT YET IMPLEMENTED");
+			}
+
+
+		
+		scanner.close();
 		
 	}
 
-	public void decrypt(String args[]) {
-
-	}
-
-	public void encrypt() {
-
-	}
 }
