@@ -75,7 +75,6 @@ public class Zip {
         
         try {
             zipInput = createZipInputStream(zipFile, magicNumber);
-            System.out.println("Works 'till here");
             ZipEntry zipEntry = zipInput.getNextEntry();
             while (zipEntry != null) {
                 if (!zipEntry.isDirectory()) {

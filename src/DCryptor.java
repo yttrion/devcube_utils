@@ -11,7 +11,7 @@ public class DCryptor {
 		
 		Scanner scanner = new Scanner(System.in);
 		int magic = 2019;
-		String version = "0.0.2";
+		String version = "0.0.3";
 		System.out.println("gDCryptor " + version);
 		System.out.println("----------------------");
 		System.out.println("1 - Decrypt");
@@ -67,7 +67,7 @@ public class DCryptor {
 		}
 		else if (choice ==2){
 			System.out.println("[*] - Encrypt mode.");
-			System.out.println("[*] - Is there an .xml file in folder?");
+			System.out.println("[*] - Is there a 'package.xml' file in folder?");
 			System.out.println("1 - Yes");
 			System.out.println("2 - No");
 			System.out.print("> ");
@@ -85,13 +85,10 @@ public class DCryptor {
 					
 					filename = chooser.getSelectedFile().getAbsolutePath();
 					System.out.println(filename);
-					path = filename + "_compressed.dc";
+					path = filename + "_compressed.zip";
 					System.out.println(path);
 					Unzip zipp = new Unzip(path, filename, magic);
 					zipp.DoIt();
-					
-
-
 				}
 				  else {
 					System.out.println("[!] - No directory selected ");
@@ -103,10 +100,7 @@ public class DCryptor {
 				System.out.println("[*] - NOT YET IMPLEMENTED");
 			}
 
-
-		
-		scanner.close();
-		
+		scanner.close();	
 	}
 
 }
