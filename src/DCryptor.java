@@ -6,8 +6,19 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.omg.CORBA.Environment;
+
 public class DCryptor {
 	public static void main(String args[]) throws Exception {
+
+
+		String separator;
+		
+    	if (System.getProperty("os.name").startsWith("Windows")) {
+    	    separator = "\\";
+    	} else {
+    	    separator = "/";
+    	} 
 		
 		Scanner scanner = new Scanner(System.in);
 		int magic = 2019;
@@ -37,16 +48,16 @@ public class DCryptor {
 				// String str = FileUtils.readFileToString(file, "UTF-8");
 				path = chooser.getCurrentDirectory().toString();
 
-				// Décryptage et récupération du zip
+				// Decryptage et recuperation du zip
 				Map<String, byte[]> zipEntries = Zip.readEntries(dc_file, magic);
 
 				System.out.println("[*] - Unzipped.");
 				System.out.println("[*] - Extracting.");
 
-				new File(path + "\\" + filename + "_extracted").mkdirs();
+				new File(path + separator + filename + "_extracted").mkdirs();
 				System.out.println("[*] - _extracted folder created.");
 
-				// Boucle de lecture et de récupération des fichiers
+				// Boucle de lecture et de recuperation des fichiers
 				Set<Entry<String, byte[]>> setZip = zipEntries.entrySet();
 				Iterator<Entry<String, byte[]>> it = setZip.iterator();
 				while (it.hasNext()) {
@@ -55,7 +66,7 @@ public class DCryptor {
 					System.out.println("[*] - Extracting " + current_file + "...");
 					byte[] data = (byte[]) zipEntries.get(current_file);
 					try (FileOutputStream fos = new FileOutputStream(
-							path + "\\" + filename + "_extracted\\" + current_file)) {
+							path + separator + filename + "_extracted" + separator + current_file)) {
 						fos.write(data);
 					}
 				}
@@ -100,7 +111,7 @@ public class DCryptor {
 				System.out.println("[*] - NOT YET IMPLEMENTED");
 			}
 
-		scanner.close();	
+		scanner.close();
 	}
 
 }
